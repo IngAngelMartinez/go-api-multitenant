@@ -1,0 +1,23 @@
+[
+    {
+        "tenantId": "Tenant01",
+        "mongoDBConfiguration": {
+            "connectionString": "mongodb://127.0.0.1:27017",
+            "databaseName": "t01"
+        }
+    },
+    {
+        "tenantId": "Tenant02",
+        "mongoDBConfiguration": {
+            "connectionString": "mongodb://127.0.0.1:27017",
+            "databaseName": "t02"
+        }
+    },
+    {
+        "tenantId": "Tenant03",
+        "mongoDBConfiguration": {
+            "connectionString": "mongodb://127.0.0.1:27017",
+            "databaseName": "t03"
+        }
+    }
+]
