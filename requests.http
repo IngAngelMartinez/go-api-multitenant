@@ -1,0 +1,33 @@
+###  
+GET http://localhost:3000/api/documents
+TenantId: Tenant01
+
+###  
+GET http://localhost:3000/api/documents/63b1e2c280f0277ae35e475a
+TenantId: Tenant01
+
+###  
+POST  http://localhost:3000/api/documents
+content-type: application/json
+TenantId: Tenant01
+
+{
+    "name": "Angel",
+    "data": {
+        "field01": "value",
+        "field02": 2,
+        "what ever": "yeah!",
+        "complex object": {
+            "description": "Description of complex object",
+            "items": [
+                "dog",
+                "cat",
+                10,
+                true
+            ],
+            "price": 28.47
+        }
+    },
+    "number": 1,
+    "date": "2022-11-19T12:00:00.300Z"
+}
