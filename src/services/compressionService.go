@@ -48,6 +48,23 @@ func (s *DocumentsService) Create(document models.Document) (string, error) {
 	return id, nil
 }
 
+func (s *DocumentsService) Update(id string, document models.Document) error {
+
+	modifiedCount, err := s.DocumentsRepository.Update(id, document)
+
+	if err != nil {
+
+		return err
+	}
+
+	if modifiedCount == 0 {
+
+		return errors.New(fmt.Sprintf("Not found documents with id: %s", id))
+	}
+
+	return nil
+}
+
 func (s *DocumentsService) Delete(id string) error {
 
 	deletedCount, err := s.DocumentsRepository.Delete(id)
