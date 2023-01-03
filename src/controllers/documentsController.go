@@ -14,7 +14,7 @@ func GetAll(c *fiber.Ctx) error {
 
 	if err != nil {
 
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"message": err})
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"message": err.Error()})
 	}
 
 	if result == nil {
@@ -52,7 +52,7 @@ func Create(c *fiber.Ctx) error {
 
 	if err := c.BodyParser(&document); err != nil {
 
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"message": err})
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"message": err.Error()})
 	}
 
 	documentsService := c.Locals("DocumentsService").(*services.DocumentsService)
@@ -60,7 +60,8 @@ func Create(c *fiber.Ctx) error {
 	id, err := documentsService.Create(document)
 
 	if err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"message": err})
+
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"message": err.Error()})
 	}
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{"id": id})
