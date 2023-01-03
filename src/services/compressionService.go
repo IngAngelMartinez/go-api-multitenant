@@ -59,7 +59,7 @@ func (s *DocumentsService) Update(id string, document models.Document) error {
 
 	if modifiedCount == 0 {
 
-		return err
+		return errors.New(fmt.Sprintf("Not found documents with id: %s", id))
 	}
 
 	return nil
