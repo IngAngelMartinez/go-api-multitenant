@@ -65,3 +65,19 @@ func Create(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{"id": id})
 }
+
+func Delete(c *fiber.Ctx) error {
+
+	documentsService := c.Locals("DocumentsService").(*services.DocumentsService)
+
+	id := c.Params("id")
+
+	err := documentsService.Delete(id)
+
+	if err != nil {
+
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"message": err.Error()})
+	}
+
+	return c.SendStatus(fiber.StatusNoContent)
+}
