@@ -20,5 +20,7 @@ func documentsRoute(apiRouter fiber.Router) {
 
 	apiRouter.Post("/documents/", controllers.Create)
 
+	apiRouter.Put("/documents/:id", controllers.Update)
+
 	apiRouter.Delete("documents/:id", controllers.Delete)
 }
