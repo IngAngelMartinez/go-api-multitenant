@@ -79,3 +79,21 @@ func (d *DocumentsRepository) Create(document models.Document) (string, error) {
 
 	return result, nil
 }
+
+func (d *DocumentsRepository) Delete(id string) (int64, error) {
+
+	objectId, err := primitive.ObjectIDFromHex(id)
+
+	if err != nil {
+
+		return 0, err
+	}
+
+	deleteResult, err := d.Collection.DeleteOne(ctx, bson.M{"_id": objectId})
+
+	if err != nil {
+		return 0, err
+	}
+
+	return deleteResult.DeletedCount, nil
+}

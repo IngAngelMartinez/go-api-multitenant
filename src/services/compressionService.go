@@ -1,6 +1,9 @@
 package services
 
 import (
+	"errors"
+	"fmt"
+
 	"github.com/IngAngelMartinez/go-api-multitenant/src/models"
 	"github.com/IngAngelMartinez/go-api-multitenant/src/repository"
 )
@@ -43,4 +46,21 @@ func (s *DocumentsService) Create(document models.Document) (string, error) {
 	}
 
 	return id, nil
+}
+
+func (s *DocumentsService) Delete(id string) error {
+
+	deletedCount, err := s.DocumentsRepository.Delete(id)
+
+	if err != nil {
+
+		return err
+	}
+
+	if deletedCount == 0 {
+
+		return errors.New(fmt.Sprintf("Not found documents with id: %s", id))
+	}
+
+	return nil
 }

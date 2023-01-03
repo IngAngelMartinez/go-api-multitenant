@@ -31,3 +31,7 @@ TenantId: Tenant01
     "number": 1,
     "date": "2022-11-19T12:00:00.300Z"
 }
+
+###
+DELETE http://localhost:3000/api/documents/63b1e2c280f0277ae35e475a
+TenantId: Tenant01
