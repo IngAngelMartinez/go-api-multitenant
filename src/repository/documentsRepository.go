@@ -80,6 +80,25 @@ func (d *DocumentsRepository) Create(document models.Document) (string, error) {
 	return result, nil
 }
 
+func (d *DocumentsRepository) Update(id string, document models.Document) (int64, error) {
+
+	objectId, err := primitive.ObjectIDFromHex(id)
+
+	if err != nil {
+
+		return 0, err
+	}
+
+	updateResult, err := d.Collection.ReplaceOne(ctx, bson.M{"_id": objectId}, document)
+
+	if err != nil {
+
+		return 0, err
+	}
+
+	return updateResult.ModifiedCount, nil
+}
+
 func (d *DocumentsRepository) Delete(id string) (int64, error) {
 
 	objectId, err := primitive.ObjectIDFromHex(id)
@@ -92,6 +111,7 @@ func (d *DocumentsRepository) Delete(id string) (int64, error) {
 	deleteResult, err := d.Collection.DeleteOne(ctx, bson.M{"_id": objectId})
 
 	if err != nil {
+
 		return 0, err
 	}
 

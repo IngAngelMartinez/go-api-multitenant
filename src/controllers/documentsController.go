@@ -67,15 +67,34 @@ func Create(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{"id": id})
 }
 
+func Update(c *fiber.Ctx) error {
+
+	documentsService := c.Locals("DocumentsService").(*services.DocumentsService)
+
+	id := c.Params("id")
+
+	var document models.Document
+
+	if err := c.BodyParser(&document); err != nil {
+
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"message": err.Error()})
+	}
+
+	if err := documentsService.Update(id, document); err != nil {
+
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"message": err.Error()})
+	}
+
+	return c.SendStatus(fiber.StatusNoContent)
+}
+
 func Delete(c *fiber.Ctx) error {
 
 	documentsService := c.Locals("DocumentsService").(*services.DocumentsService)
 
 	id := c.Params("id")
 
-	err := documentsService.Delete(id)
-
-	if err != nil {
+	if err := documentsService.Delete(id); err != nil {
 
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"message": err.Error()})
 	}
